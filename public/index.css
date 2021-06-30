@@ -1,0 +1,14 @@
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+    outline: none;
+}
+body {
+    overflow-x: hidden;
+    background: url('https://image.tmdb.org/t/p/original/haASBIzQIrXgvrK0bDdHr4A7gBT.jpg') center center no-repeat;
+    background-attachment:fixed;
+    background-size: cover;
+    font-size: 16px;
+    height: 100%;	
+}

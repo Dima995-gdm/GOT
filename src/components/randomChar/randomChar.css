@@ -1,0 +1,20 @@
+.random-block {
+    background-color: #fff;
+    padding: 25px 25px 15px 25px;
+    margin-bottom: 40px;
+    background-color: rgba(0,0,0, 0.5)
+}
+.random-block h4 {
+    margin-bottom: 20px;
+    text-align: center;
+    color: white;
+}
+.term {
+    font-weight: bold;
+}
+
+.random-block .list-group-item{
+    background-color: rgba(0,0,0, 0);
+    color: white;
+    border: 1px solid rgba(100, 0, 0)
+}

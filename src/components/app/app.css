@@ -1,0 +1,13 @@
+.btn.btn-danger{
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 40px;
+}
+
+.app {
+    background: linear-gradient(rgba(0, 0, 0, 0.9),rgba(0, 0, 0, 0.3)),
+    url('https://i0.wp.com/image.tmdb.org/t/p/original/fPmbg4HuUuIqLYPofFy85C7spI6.jpg') center center no-repeat;
+    background-size: cover;
+    height: 1000px;
+    background-attachment:fixed;
+}

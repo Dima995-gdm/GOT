@@ -1,0 +1,10 @@
+.random-block img {
+    width: 100%;
+    border-radius: 1%
+}
+
+.random-block span {
+    display: block;
+    text-align: center;
+    
+}
