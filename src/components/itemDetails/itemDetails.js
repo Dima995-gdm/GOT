@@ -83,7 +83,7 @@ export default class ItemDetails extends Component {
         
         if (!item && error) {
             return <ErrorMessage/>
-        }else if (!item) {
+        } else if (!item) {
             return <span className="select-error">Please select an item</span>
         }
 
