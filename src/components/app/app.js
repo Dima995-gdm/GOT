@@ -6,9 +6,12 @@ import RandomChar from '../randomChar';
 import ErrorMessage from '../error';
 import {CharacterPage, HousePage, BookPage, BooksItem} from '../pages';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import GotService from '../../services/gotService';
 
 
 export default class App extends Component{
+
+    gotService = new GotService();
 
     state = {
         show: true,
@@ -38,7 +41,7 @@ export default class App extends Component{
     render() {
         const {show} = this.state
 
-        const showRandomChar = show ? <RandomChar/> : null
+        const showRandomChar = show ? <RandomChar getChar = {this.gotService.getCharacter}/> : null
 
         if (this.state.error) {
             return <ErrorMessage/>

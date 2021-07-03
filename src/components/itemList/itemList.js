@@ -20,7 +20,7 @@ function ItemList({getData, onItemSelected, renderItem}) {
                 setLoading(false)
             })
             .catch(onError)
-    }, [getData])
+    }, [])
 
 
     function onError(err){

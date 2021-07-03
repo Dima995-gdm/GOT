@@ -27,7 +27,6 @@ function ItemDetails({itemId, getItem, children}) {
 
 
     useEffect(() => {
-        console.log(itemId);
         updateItem()
     }, [itemId])
 
