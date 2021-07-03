@@ -8,13 +8,16 @@ import './itemList.css';
 
 function ItemList({getData, onItemSelected, renderItem}) {
 
-    const [itemList, updateList] = useState([])
-    const [error, setError] = useState(false)
+    const [itemList, updateList] = useState([]);
+    const [error, setError] = useState(false);
+    const [loading, setLoading] = useState(true);
 
+    
     useEffect(() => {
         getData()
             .then( (data) => {
                 updateList(data)
+                setLoading(false)
             })
             .catch(onError)
     }, [getData])
@@ -46,7 +49,7 @@ function ItemList({getData, onItemSelected, renderItem}) {
         return <ErrorMessage/>
     }
 
-    if(!itemList) {
+    if(loading) {
         return <Spinner/>
     }
 

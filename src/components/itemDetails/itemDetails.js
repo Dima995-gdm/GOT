@@ -1,6 +1,5 @@
-import React, {Component} from 'react';
+import React, {useState, useEffect} from 'react';
 import { ListGroup, ListGroupItem } from 'reactstrap';
-import GotService from '../../services/gotService';
 import Spinner from '../spinner';
 import ErrorMessage from '../error';
 import './itemDetails.css';
@@ -20,93 +19,75 @@ const Field = ({item, field, label}) => {
 export {Field} 
 
 
-export default class ItemDetails extends Component {
+function ItemDetails({itemId, getItem, children}) {
 
-    gotService = new GotService();
+    const [item, setItem] = useState(null);
+    const [error, setError] = useState(false);
+    const [loading, setLoading] = useState(true);
 
-    state = {
-        item: null,
-        loading: true,
-        error: false
+
+    useEffect(() => {
+        console.log(itemId);
+        updateItem()
+    }, [itemId])
+
+
+
+    function onItemDetailsLoaded(item){
+        setItem(item)
+        setLoading(false)
+
     }
 
-    componentDidMount() {
-        this.updateItem()
-
-    }
-
-    componentDidUpdate(prevProps) {
-        if (this.props.itemId !== prevProps.itemId) {
-            this.updateItem()
-        }
-    }
-
-    onItemDetailsLoaded = (item) => {
-        this.setState({
-            item,
-            loading: false
-            
-        })
-    }
-
-    onError = (err) => {
-        console.log('error details');
-        this.setState({
-            item: null,
-            error: true,
-            loading: false
-        })
+    function onError(err){
+        setItem(item)
+        setError(true)
+        setLoading(false)
     }
     
 
-    updateItem() {
-        const {itemId, getItem} = this.props
+    function updateItem() {
         if (!itemId) {
             return
         }
 
-        this.setState({
-            loading: true
-        })
+        setLoading(true)
 
         getItem(itemId)
-            .then(this.onItemDetailsLoaded)
-            .catch(this.onError)
+            .then(onItemDetailsLoaded)
+            .catch(onError)
     }
 
-    render() {
 
-        const {item, loading, error} = this.state
-
-
-
-        
-        if (!item && error) {
-            return <ErrorMessage/>
-        } else if (!item) {
-            return <span className="select-error">Please select an item</span>
-        }
-
-        if (loading) {
-            return <Spinner/>
-        }
-
-
-        const { name } = item
-
-        return (
-            <div className="item-details rounded">
-            <h4>{name}</h4>
-            <ListGroup flush>
-                {
-                    React.Children.map(this.props.children, (child) => {
-                        return React.cloneElement(child, {item})
-                    })
-                }
-            </ListGroup>
-            </div>
-        )
-
+    
+    if (!item && error) {
+        return <ErrorMessage/>
+    } else if (!item) {
+        return <span className="select-error">Please select an item</span>
     }
+
+    if (loading) {
+        return <Spinner/>
+    }
+
+
+    const { name } = item
+
+    return (
+        <div className="item-details rounded">
+        <h4>{name}</h4>
+        <ListGroup flush>
+            {
+                React.Children.map(children, (child) => {
+                    return React.cloneElement(child, {item})
+                })
+            }
+        </ListGroup>
+        </div>
+    )
+
+
 }
+
+export default ItemDetails;
 
